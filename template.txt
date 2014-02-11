@@ -1,0 +1,1 @@
+/* %FILENAME% from libstand http://github.com/qtau-devgroup/libstand by %USER%, BSD license */
