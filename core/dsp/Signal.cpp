@@ -23,3 +23,13 @@ void Signal::setSamplingFrequency(int fs)
 {
     this->fs = fs;
 }
+
+double Signal::msLength() const
+{
+    return size() / (double)fs * 1000.0;
+}
+
+int Signal::indexAt(double ms) const
+{
+    return fs * ms / 1000.0;
+}

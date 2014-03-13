@@ -40,7 +40,9 @@ HEADERS += \
     test/utau/UtauCharacterInfoTest.h \
     test/utau/UtauPrefixMapTest.h \
     test/corpus/WaveformFrameInfoRepositoryTest.h \
-    test/helper/MockResourceRepository.h
+    test/helper/MockResourceRepository.h \
+    test/corpus/UtauPhonemeConverterTest.h \
+    test/helper/MockResourceFactory.h
 
 SOURCES += \
     test/main.cpp \

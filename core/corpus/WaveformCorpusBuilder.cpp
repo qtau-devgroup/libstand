@@ -5,34 +5,24 @@
 
 using namespace stand;
 
-WaveformCorpusBuilder::WaveformCorpusBuilder() :
-    phonemeMapper(new NotePhonemeMapper())
+WaveformCorpusBuilder::WaveformCorpusBuilder(QSharedPointer<ResourceFactory<QString, Signal> > signalFactory, QSharedPointer<UtauPhonemeConverter> converter) :
+    signalFactory(signalFactory), converter(converter), phonemeMapper(new NotePhonemeMapper())
 {
 }
 
-WaveformCorpusBuilder &WaveformCorpusBuilder::add(const QString &id, const UtauOtoHash &oto, const QDir &baseDirectory, const QString &suffix)
+WaveformCorpusBuilder &WaveformCorpusBuilder::add(const QString &id, const UtauOtoHash &oto, const QString &suffix)
 {
-    if(phonemeRepositories.contains(id))
+    if(converter.isNull() || signalFactory.isNull() || phonemeRepositories.contains(id))
     {
         return *this;
     }
+
     QSharedPointer<ResourceRepository<QString, Phoneme> > repository = QSharedPointer<ResourceRepository<QString, Phoneme> >(new PhonemeRepository);
     foreach(const UtauPhoneme &phoneme, oto.values())
     {
-        double msLength;
-        if(phoneme.msRightBlank < 0)
-        {
-            msLength = -phoneme.msRightBlank;
-        }
-        else
-        {
-            // get msLength from WAVE.
-        }
         QString pronounce(phoneme.pronounce);
-        pronounce.remove(suffix);
-        QString filepath(baseDirectory.relativeFilePath(phoneme.filename));
-        QSharedPointer<Phoneme> p(new Phoneme(filepath, phoneme.msLeftBlank, msLength, phoneme.msFixedLength, phoneme.msPreutterance, phoneme.msOverlap));
-        repository->add(pronounce, p);
+        pronounce.remove(suffix + "$");
+        repository->add(pronounce, converter->convert(phoneme, oto.directory(), signalFactory));
     }
     phonemeRepositories.insert(id, QSharedPointer<ResourceRepository<QString, Phoneme> >(repository));
     return *this;

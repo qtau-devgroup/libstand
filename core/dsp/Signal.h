@@ -32,6 +32,8 @@ public:
 
     int samplingFrequency() const;
     void setSamplingFrequency(int fs);
+    double msLength() const;
+    int indexAt(double ms) const;
 private:
     int fs;
 };

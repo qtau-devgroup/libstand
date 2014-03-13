@@ -57,7 +57,8 @@ HEADERS += \
     core/corpus/NotePhonemeMapper.h \
     core/corpus/WaveformCorpusBuilder.h \
     core/corpus/WaveformCorpus.h \
-    core/corpus/CorpusMeta.h
+    core/corpus/CorpusMeta.h \
+    core/corpus/UtauPhonemeConverter.h
 
 SOURCES += \
     core/utau/UtauPhoneme.cpp \
@@ -106,7 +107,8 @@ SOURCES += \
     core/corpus/NotePhonemeMapper.cpp \
     core/corpus/WaveformCorpusBuilder.cpp \
     core/corpus/WaveformCorpus.cpp \
-    core/corpus/CorpusMeta.cpp
+    core/corpus/CorpusMeta.cpp \
+    core/corpus/UtauPhonemeConverter.cpp
 
 INCLUDEPATH += \
     core
