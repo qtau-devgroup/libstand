@@ -57,6 +57,12 @@ public:
      */
     virtual void remove(const PhonemeKey &key);
 
+    QJsonValue toJson() const;
+    static QSharedPointer<ResourceRepository<PhonemeKey, WaveformFrameInfoList> > fromJson(
+            const QJsonValue &json,
+            const QSharedPointer<PhonemeSelector> selector
+            );
+
 private:
     const CorpusMeta meta;
     const QSharedPointer<NotePhonemeMapper> phonemeMapper;

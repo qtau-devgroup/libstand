@@ -3,7 +3,7 @@
 
 using namespace stand;
 
-QSharedPointer<WaveformFrameInfoList> PhonemeSelector::select(const NotePhonemeMappingList &items, const QList<QSharedPointer<Phoneme> > &phonemes) const
+QSharedPointer<WaveformFrameInfoList> PhonemeSelector::select(double msPosition, const NotePhonemeMappingList &items, const QList<QSharedPointer<Phoneme> > &phonemes) const
 {
     if(items.size() != phonemes.size())
     {
@@ -13,14 +13,13 @@ QSharedPointer<WaveformFrameInfoList> PhonemeSelector::select(const NotePhonemeM
     WaveformFrameInfoList *result = new WaveformFrameInfoList;
     for(int i = 0; i < items.size(); i++)
     {
-        *result += fromOnePhoneme(items[i], phonemes[i]);
+        *result += fromOnePhoneme(msPosition, items[i], phonemes[i]);
     }
     return QSharedPointer<WaveformFrameInfoList>(result);
 }
 
-WaveformFrameInfoList PhonemeSelector::fromOnePhoneme(const NotePhonemeMappingItem &item, const QSharedPointer<Phoneme> &phoneme) const
+WaveformFrameInfoList PhonemeSelector::fromOnePhoneme(double msPosition, const NotePhonemeMappingItem &item, const QSharedPointer<Phoneme> &phoneme) const
 {
-    double msPosition = qMax(-phoneme->msPreutterance, item.msPosition);
     WaveformFrameInfoList result;
     double msFixedEndRelativePosition = (phoneme->msFixedLength - phoneme->msPreutterance);
     if(msPosition < msFixedEndRelativePosition)

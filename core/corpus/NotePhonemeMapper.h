@@ -2,7 +2,9 @@
 #ifndef NOTEPHONEMEMAPPER_H
 #define NOTEPHONEMEMAPPER_H
 
+#include <QJsonValue>
 #include <QList>
+#include <QSharedPointer>
 #include <QString>
 
 namespace stand
@@ -15,15 +17,19 @@ namespace stand
 class NotePhonemeMappingItem
 {
 public:
-    NotePhonemeMappingItem(const QString &id, double msPosition, double amplify);
+    NotePhonemeMappingItem(const QString &id, double amplify);
     NotePhonemeMappingItem(const NotePhonemeMappingItem &other);
     NotePhonemeMappingItem &operator =(const NotePhonemeMappingItem &other);
 
     bool operator ==(const NotePhonemeMappingItem &other);
 
+    QJsonValue toJson() const;
+    static QSharedPointer<NotePhonemeMappingItem> fromJson(const QJsonValue &json);
+
     QString id;
-    double msPosition;
     double amplify;
+private:
+    static bool isValid(const QJsonObject &json);
 };
 
 typedef QList<NotePhonemeMappingItem> NotePhonemeMappingList;
@@ -41,7 +47,13 @@ public:
     virtual ~NotePhonemeMapper(){ }
     virtual const NotePhonemeMappingList &find(int note, int velocity) const;
     virtual QList<NotePhonemeMappingList> &operator[](int index);
+
+    QJsonValue toJson() const;
+    static QSharedPointer<NotePhonemeMapper> fromJson(const QJsonValue &json);
 private:
+    static QList<NotePhonemeMappingList> elementListFromJson(const QJsonArray &velocities);
+    static NotePhonemeMappingList mappingListFromJson(const QJsonArray &elements);
+
     QList<QList<NotePhonemeMappingList> > elementTable;
     static const NotePhonemeMappingList nullElement;
 };

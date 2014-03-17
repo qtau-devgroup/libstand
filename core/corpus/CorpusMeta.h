@@ -2,6 +2,8 @@
 #ifndef COPUSMETA_H
 #define COPUSMETA_H
 
+#include <QJsonValue>
+#include <QSharedPointer>
 #include <QString>
 #include <QUrl>
 
@@ -27,11 +29,17 @@ public:
     CorpusMeta(const CorpusMeta &other);
     CorpusMeta &operator =(const CorpusMeta &other);
 
+    QJsonValue toJson() const;
+    static QSharedPointer<CorpusMeta> fromJson(const QJsonValue &json);
+
     QString name;
     QString imagePath;
     QString samplePath;
     QString author;
     QUrl web;
+
+private:
+    static bool isValid(const QJsonObject &json);
 };
 
 }

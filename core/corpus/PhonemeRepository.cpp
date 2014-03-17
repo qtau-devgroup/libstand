@@ -1,4 +1,6 @@
 /* PhonemeRepository.cpp from libstand http://github.com/qtau-devgroup/libstand by Hal@ShurabaP, BSD license */
+#include <QJsonObject>
+
 #include "PhonemeRepository.h"
 
 using namespace stand;
@@ -33,4 +35,29 @@ void PhonemeRepository::remove(const QString &key)
     {
         dictionary.remove(key);
     }
+}
+
+QJsonValue PhonemeRepository::toJson() const
+{
+    QJsonObject object;
+    foreach(const QString &key, dictionary.keys())
+    {
+        object[key] = dictionary[key]->toJson();
+    }
+    return QJsonValue(object);
+}
+
+QSharedPointer<ResourceRepository<QString, Phoneme> > PhonemeRepository::fromJson(const QJsonValue &json)
+{
+    if(!json.isObject())
+    {
+        return QSharedPointer<ResourceRepository<QString, Phoneme> >();
+    }
+    QSharedPointer<ResourceRepository<QString, Phoneme> > repository(new PhonemeRepository);
+    QJsonObject object(json.toObject());
+    for(auto it = object.begin(); it != object.end(); it++)
+    {
+        repository->add(it.key(), Phoneme::fromJson(it.value()));
+    }
+    return repository;
 }

@@ -19,9 +19,9 @@ class PhonemeSelector
 {
 public:
     virtual ~PhonemeSelector(){ }
-    virtual QSharedPointer<WaveformFrameInfoList> select(const NotePhonemeMappingList &items, const QList<QSharedPointer<Phoneme> > &phonemes) const;
+    virtual QSharedPointer<WaveformFrameInfoList> select(double msPosition, const NotePhonemeMappingList &items, const QList<QSharedPointer<Phoneme> > &phonemes) const;
 private:
-    WaveformFrameInfoList fromOnePhoneme(const NotePhonemeMappingItem &item, const QSharedPointer<Phoneme> &phoneme) const;
+    WaveformFrameInfoList fromOnePhoneme(double msPosition, const NotePhonemeMappingItem &item, const QSharedPointer<Phoneme> &phoneme) const;
 };
 
 }

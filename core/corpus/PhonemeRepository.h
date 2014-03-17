@@ -44,6 +44,21 @@ public:
      * @param key to remove.
      */
     void remove(const QString &key);
+
+
+    /**
+     * @brief toJson converts this instance to QJsonValue.
+     * @return QJsonValue
+     */
+    QJsonValue toJson() const;
+
+    /**
+     * @brief fromJson is a factory method of PhonemeRepository from JSON.
+     * @param json to read.
+     * @return QSharedPointer<PhonemeRepository> if succeeded, otherwise null.
+     */
+    static QSharedPointer<ResourceRepository<QString, Phoneme> > fromJson(const QJsonValue &json);
+
 private:
     QHash<QString, QSharedPointer<Phoneme> > dictionary;
 };
