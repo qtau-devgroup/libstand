@@ -11,6 +11,10 @@
 namespace stand
 {
 
+/**
+ * @brief The PhonemeSelector class selects a proper timing of phonemes.
+ * @author Hal@shurabaP
+ */
 class PhonemeSelector
 {
 public:

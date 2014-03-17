@@ -42,7 +42,9 @@ HEADERS += \
     test/corpus/WaveformFrameInfoRepositoryTest.h \
     test/helper/MockResourceRepository.h \
     test/corpus/UtauPhonemeConverterTest.h \
-    test/helper/MockResourceFactory.h
+    test/helper/MockResourceFactory.h \
+    test/corpus/PhonemeSelectorTest.h \
+    test/corpus/WaveformCorpusTest.h
 
 SOURCES += \
     test/main.cpp \

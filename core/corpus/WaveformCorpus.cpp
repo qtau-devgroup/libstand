@@ -4,15 +4,16 @@
 using namespace stand;
 
 WaveformCorpus::WaveformCorpus(
+    const CorpusMeta &meta,
     const QSharedPointer<NotePhonemeMapper> phonemeMapper,
     const QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories,
     const QSharedPointer<PhonemeSelector> selector
-) : phonemeMapper(phonemeMapper), phonemeRepositories(phonemeRepositories), selector(selector)
+) : meta(meta), phonemeMapper(phonemeMapper), phonemeRepositories(phonemeRepositories), selector(selector)
 {
 }
 
 WaveformCorpus::WaveformCorpus(const WaveformCorpus &other) :
-    WaveformCorpus(other.phonemeMapper, other.phonemeRepositories, other.selector)
+    WaveformCorpus(other.meta, other.phonemeMapper, other.phonemeRepositories, other.selector)
 {
 }
 
@@ -27,8 +28,7 @@ const QSharedPointer<WaveformFrameInfoList> WaveformCorpus::find(const PhonemeKe
     QList<QSharedPointer<Phoneme> > phonemes;
     foreach(const auto &item, items)
     {
-        const QSharedPointer<ResourceRepository<QString, Phoneme> > &repository(phonemeRepositories.find(item.id).value());
-        phonemes.append(repository->find(key.pronounce));
+        phonemes.append(phonemeRepositories[item.id]->find(key.pronounce));
     }
     return selector->select(items, phonemes);
 }

@@ -5,8 +5,8 @@
 
 using namespace stand;
 
-WaveformCorpusBuilder::WaveformCorpusBuilder(QSharedPointer<ResourceFactory<QString, Signal> > signalFactory, QSharedPointer<UtauPhonemeConverter> converter) :
-    signalFactory(signalFactory), converter(converter), phonemeMapper(new NotePhonemeMapper())
+WaveformCorpusBuilder::WaveformCorpusBuilder(const CorpusMeta &meta, QSharedPointer<ResourceFactory<QString, Signal> > signalFactory, QSharedPointer<UtauPhonemeConverter> converter) :
+    meta(meta), signalFactory(signalFactory), converter(converter), phonemeMapper(new NotePhonemeMapper())
 {
 }
 
@@ -66,5 +66,5 @@ WaveformCorpusBuilder &WaveformCorpusBuilder::addMappingItem(int note, int veloc
 
 QSharedPointer<WaveformCorpus> WaveformCorpusBuilder::build(const QSharedPointer<PhonemeSelector> selector)
 {
-    return QSharedPointer<WaveformCorpus>(new WaveformCorpus(phonemeMapper, phonemeRepositories, selector));
+    return QSharedPointer<WaveformCorpus>(new WaveformCorpus(meta, phonemeMapper, phonemeRepositories, selector));
 }

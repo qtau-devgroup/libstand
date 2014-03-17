@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QSharedPointer>
 
+#include "corpus/CorpusMeta.h"
 #include "corpus/NotePhonemeMapper.h"
 #include "corpus/Phoneme.h"
 #include "corpus/PhonemeKey.h"
@@ -23,6 +24,7 @@ class WaveformCorpus : public ResourceRepository<PhonemeKey, WaveformFrameInfoLi
 {
 public:
     explicit WaveformCorpus(
+        const CorpusMeta &meta,
         const QSharedPointer<NotePhonemeMapper> phonemeMapper,
         const QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories,
         const QSharedPointer<PhonemeSelector> selector
@@ -56,6 +58,7 @@ public:
     virtual void remove(const PhonemeKey &key);
 
 private:
+    const CorpusMeta meta;
     const QSharedPointer<NotePhonemeMapper> phonemeMapper;
     const QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories;
     const QSharedPointer<PhonemeSelector> selector;
