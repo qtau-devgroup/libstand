@@ -45,20 +45,13 @@ public:
      */
     void remove(const QString &key);
 
-
     /**
-     * @brief toJson converts this instance to QJsonValue.
-     * @return QJsonValue
+     * @brief keys returns all the keys in this repository.
+     *        Each key must be contained by this repository,
+     *        in other words, find(key) must not return null for each key.
+     * @return
      */
-    QJsonValue toJson() const;
-
-    /**
-     * @brief fromJson is a factory method of PhonemeRepository from JSON.
-     * @param json to read.
-     * @return QSharedPointer<PhonemeRepository> if succeeded, otherwise null.
-     */
-    static QSharedPointer<ResourceRepository<QString, Phoneme> > fromJson(const QJsonValue &json);
-
+    QList<QString> keys() const;
 private:
     QHash<QString, QSharedPointer<Phoneme> > dictionary;
 };

@@ -37,27 +37,7 @@ void PhonemeRepository::remove(const QString &key)
     }
 }
 
-QJsonValue PhonemeRepository::toJson() const
+QList<QString> PhonemeRepository::keys() const
 {
-    QJsonObject object;
-    foreach(const QString &key, dictionary.keys())
-    {
-        object[key] = dictionary[key]->toJson();
-    }
-    return QJsonValue(object);
-}
-
-QSharedPointer<ResourceRepository<QString, Phoneme> > PhonemeRepository::fromJson(const QJsonValue &json)
-{
-    if(!json.isObject())
-    {
-        return QSharedPointer<ResourceRepository<QString, Phoneme> >();
-    }
-    QSharedPointer<ResourceRepository<QString, Phoneme> > repository(new PhonemeRepository);
-    QJsonObject object(json.toObject());
-    for(auto it = object.begin(); it != object.end(); it++)
-    {
-        repository->add(it.key(), Phoneme::fromJson(it.value()));
-    }
-    return repository;
+    return dictionary.keys();
 }

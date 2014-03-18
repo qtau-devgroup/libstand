@@ -2,9 +2,6 @@
 #ifndef PHONEME_H
 #define PHONEME_H
 
-#include <QJsonValue>
-#include <QList>
-#include <QSharedPointer>
 #include <QString>
 
 namespace stand
@@ -22,18 +19,12 @@ public:
     Phoneme &operator =(const Phoneme &other);
     bool operator ==(const Phoneme &other) const;
 
-    QJsonValue toJson() const;
-    static QSharedPointer<Phoneme> fromJson(const QJsonValue &json);
-
     QString filename;
     double msBegin;
     double msLength;
     double msFixedLength;
     double msPreutterance;
     double msOverlap;
-
-private:
-    static bool isValid(const QJsonObject &json);
 };
 
 }

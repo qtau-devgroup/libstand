@@ -31,35 +31,6 @@ bool NotePhonemeMappingItem::operator ==(const NotePhonemeMappingItem &other)
             amplify == other.amplify;
 }
 
-QJsonValue NotePhonemeMappingItem::toJson() const
-{
-    QJsonObject object;
-    object["id"] = id;
-    object["amplify"] = amplify;
-    return QJsonValue(object);
-}
-
-QSharedPointer<NotePhonemeMappingItem> NotePhonemeMappingItem::fromJson(const QJsonValue &json)
-{
-    if(!json.isObject())
-    {
-        return QSharedPointer<NotePhonemeMappingItem>();
-    }
-    QJsonObject object(json.toObject());
-    if(!isValid(object))
-    {
-        return QSharedPointer<NotePhonemeMappingItem>();
-    }
-    return QSharedPointer<NotePhonemeMappingItem>(
-                new NotePhonemeMappingItem(object["id"].toString(), object["amplify"].toDouble())
-            );
-}
-
-bool NotePhonemeMappingItem::isValid(const QJsonObject &json)
-{
-    return json["id"].isString() && json["amplify"].isDouble();
-}
-
 NotePhonemeMapper::NotePhonemeMapper()
 {
     elementTable.reserve(128);
@@ -100,85 +71,7 @@ QList<NotePhonemeMappingList> &NotePhonemeMapper::operator [](int index)
     return elementTable[index];
 }
 
-QJsonValue NotePhonemeMapper::toJson() const
+const QList<QList<NotePhonemeMappingList> > &NotePhonemeMapper::table() const
 {
-    QJsonArray table;
-    foreach(const auto &elementList, elementTable)
-    {
-        QJsonArray list;
-        foreach(const NotePhonemeMappingList &singleElement, elementList)
-        {
-            QJsonArray element;
-            foreach(const NotePhonemeMappingItem &item, singleElement)
-            {
-                element.append(item.toJson());
-            }
-            list.append(element);
-        }
-        table.append(list);
-    }
-    return QJsonValue(table);
-}
-
-QSharedPointer<NotePhonemeMapper> NotePhonemeMapper::fromJson(const QJsonValue &json)
-{
-    if(!json.isArray())
-    {
-        return QSharedPointer<NotePhonemeMapper>();
-    }
-    QJsonArray array(json.toArray());
-    if(array.size() != 128)
-    {
-        return QSharedPointer<NotePhonemeMapper>();
-    }
-
-    QList<QList<NotePhonemeMappingList> > elementTable;
-
-    for(int i = 0; i < array.size(); i++)
-    {
-        if(!array.at(i).isArray())
-        {
-            return QSharedPointer<NotePhonemeMapper>();
-        }
-        QList<NotePhonemeMappingList> velocityList(elementListFromJson(array.at(i).toArray()));
-        if(velocityList.isEmpty())
-        {
-            return QSharedPointer<NotePhonemeMapper>();
-        }
-        elementTable.append(velocityList);
-    }
-    return QSharedPointer<NotePhonemeMapper>(new NotePhonemeMapper(elementTable));
-}
-
-QList<NotePhonemeMappingList> NotePhonemeMapper::elementListFromJson(const QJsonArray &velocities)
-{
-    if(velocities.size() != 128)
-    {
-        return QList<NotePhonemeMappingList>();
-    }
-    QList<NotePhonemeMappingList> elementList;
-    for(int j = 0; j < velocities.size(); j++)
-    {
-        if(!velocities.at(j).isArray())
-        {
-            return QList<NotePhonemeMappingList>();
-        }
-        elementList.append(mappingListFromJson(velocities.at(j).toArray()));
-    }
-    return elementList;
-}
-
-NotePhonemeMappingList NotePhonemeMapper::mappingListFromJson(const QJsonArray &elements)
-{
-    NotePhonemeMappingList mappingList;
-    for(int k = 0; k < elements.size(); k++)
-    {
-        QSharedPointer<NotePhonemeMappingItem> element(NotePhonemeMappingItem::fromJson(elements.at(k)));
-        if(element.isNull())
-        {
-            continue;
-        }
-        mappingList.append(*element);
-    }
-    return mappingList;
+    return elementTable;
 }

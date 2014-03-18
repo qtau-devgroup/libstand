@@ -27,7 +27,7 @@ public:
         const CorpusMeta &meta,
         const QSharedPointer<NotePhonemeMapper> phonemeMapper,
         const QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories,
-        const QSharedPointer<PhonemeSelector> selector
+        const QSharedPointer<PhonemeSelector> selector = QSharedPointer<PhonemeSelector>(new PhonemeSelector)
     );
     WaveformCorpus(const WaveformCorpus &other);
     virtual ~WaveformCorpus(){ }
@@ -57,13 +57,6 @@ public:
      */
     virtual void remove(const PhonemeKey &key);
 
-    QJsonValue toJson() const;
-    static QSharedPointer<ResourceRepository<PhonemeKey, WaveformFrameInfoList> > fromJson(
-            const QJsonValue &json,
-            const QSharedPointer<PhonemeSelector> selector
-            );
-
-private:
     const CorpusMeta meta;
     const QSharedPointer<NotePhonemeMapper> phonemeMapper;
     const QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories;
