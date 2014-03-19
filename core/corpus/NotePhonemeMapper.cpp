@@ -25,10 +25,9 @@ NotePhonemeMappingItem &NotePhonemeMappingItem::operator =(const NotePhonemeMapp
     return *this;
 }
 
-bool NotePhonemeMappingItem::operator ==(const NotePhonemeMappingItem &other)
+bool NotePhonemeMappingItem::operator ==(const NotePhonemeMappingItem &other) const
 {
-    return id == other.id &&
-            amplify == other.amplify;
+    return id == other.id && amplify == other.amplify;
 }
 
 NotePhonemeMapper::NotePhonemeMapper()

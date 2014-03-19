@@ -27,6 +27,8 @@ public:
     CorpusMeta(const CorpusMeta &other);
     CorpusMeta &operator =(const CorpusMeta &other);
 
+    bool operator==(const CorpusMeta &toher) const;
+
     QString name;
     QString imagePath;
     QString samplePath;

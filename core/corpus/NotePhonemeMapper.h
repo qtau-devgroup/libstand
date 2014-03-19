@@ -21,7 +21,7 @@ public:
     NotePhonemeMappingItem(const NotePhonemeMappingItem &other);
     NotePhonemeMappingItem &operator =(const NotePhonemeMappingItem &other);
 
-    bool operator ==(const NotePhonemeMappingItem &other);
+    bool operator ==(const NotePhonemeMappingItem &other) const;
 
     QString id;
     double amplify;

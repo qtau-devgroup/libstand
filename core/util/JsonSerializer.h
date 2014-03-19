@@ -38,7 +38,7 @@ public:
     template<class T> static QSharedPointer<T> fromJson(const QJsonValue &json)
     {
         QSharedPointer<T> t;
-        t << json;
+        json >> t;
         return t;
     }
 };

@@ -22,3 +22,12 @@ CorpusMeta &CorpusMeta::operator =(const CorpusMeta &other)
     web = other.web;
     return *this;
 }
+
+bool CorpusMeta::operator ==(const CorpusMeta &other) const
+{
+    return name == other.name &&
+        imagePath == other.imagePath &&
+        samplePath == other.samplePath &&
+        author == other.author &&
+        web == other.web;
+}

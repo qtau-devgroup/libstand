@@ -43,7 +43,11 @@ HEADERS += \
     test/corpus/UtauPhonemeConverterTest.h \
     test/helper/MockResourceFactory.h \
     test/corpus/PhonemeSelectorTest.h \
-    test/corpus/WaveformCorpusTest.h
+    test/corpus/WaveformCorpusTest.h \
+    test/corpus/json/QJsonCorpusMetaTest.h \
+    test/corpus/json/QJsonPhonemeTest.h \
+    test/corpus/json/QJsonPhonemeRepositoryTest.h \
+    test/corpus/json/QJsonNotePhonemeMapperTest.h
 
 SOURCES += \
     test/main.cpp \
