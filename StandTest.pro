@@ -47,7 +47,8 @@ HEADERS += \
     test/corpus/json/QJsonCorpusMetaTest.h \
     test/corpus/json/QJsonPhonemeTest.h \
     test/corpus/json/QJsonPhonemeRepositoryTest.h \
-    test/corpus/json/QJsonNotePhonemeMapperTest.h
+    test/corpus/json/QJsonNotePhonemeMapperTest.h \
+    test/util/SoundfileDeviceTest.h
 
 SOURCES += \
     test/main.cpp \

@@ -64,7 +64,7 @@ static SF_VIRTUAL_IO io =
 QList<Signal> SoundfileDevice::read(QSharedPointer<QIODevice> device)
 {
     SF_INFO info{0, 0, 0, 0, 0, 0};
-    if(device.isNull() || device->open(QIODevice::ReadOnly) || device->seek(0))
+    if(device.isNull() || !device->open(QIODevice::ReadOnly) || !device->seek(0))
     {
         return QList<Signal>();
     }
@@ -97,7 +97,7 @@ QList<Signal> SoundfileDevice::read(QSharedPointer<QIODevice> device)
 
 bool SoundfileDevice::write(const QList<Signal> &sounds, int format, QSharedPointer<QIODevice> device)
 {
-    if(device.isNull() || device->open(QIODevice::WriteOnly))
+    if(device.isNull() || !device->open(QIODevice::WriteOnly))
     {
         return false;
     }
