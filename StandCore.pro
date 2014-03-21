@@ -64,7 +64,9 @@ HEADERS += \
     core/corpus/json/QJsonPhoneme.h \
     core/corpus/json/QJsonPhonemeRepository.h \
     core/corpus/json/QJsonWaveformCorpus.h \
-    core/corpus/json/QJsonNotePhonemeMapper.h
+    core/corpus/json/QJsonNotePhonemeMapper.h \
+    core/corpus/UtauCharacterInfoConverter.h \
+    core/corpus/UtauWaveformCorpusBuilder.h
 
 SOURCES += \
     core/utau/UtauPhoneme.cpp \
@@ -120,7 +122,9 @@ SOURCES += \
     core/corpus/json/QJsonPhoneme.cpp \
     core/corpus/json/QJsonPhonemeRepository.cpp \
     core/corpus/json/QJsonWaveformCorpus.cpp \
-    core/corpus/json/QJsonNotePhonemeMapper.cpp
+    core/corpus/json/QJsonNotePhonemeMapper.cpp \
+    core/corpus/UtauCharacterInfoConverter.cpp \
+    core/corpus/UtauWaveformCorpusBuilder.cpp
 
 INCLUDEPATH += \
     core

@@ -5,8 +5,8 @@
 
 using namespace stand;
 
-WaveformCorpusBuilder::WaveformCorpusBuilder(const CorpusMeta &meta, QSharedPointer<ResourceFactory<QString, Signal> > signalFactory, QSharedPointer<UtauPhonemeConverter> converter) :
-    meta(meta), signalFactory(signalFactory), converter(converter), phonemeMapper(new NotePhonemeMapper())
+WaveformCorpusBuilder::WaveformCorpusBuilder(const CorpusMeta &meta, QSharedPointer<ResourceFactory<QString, Signal> > signalFactory, QSharedPointer<UtauPhonemeConverter> converter, QSharedPointer<NotePhonemeMapper> phonemeMapper) :
+    meta(meta), phonemeMapper(phonemeMapper), signalFactory(signalFactory), converter(converter)
 {
 }
 

@@ -38,7 +38,7 @@ private slots:
         EXPECT_CALL(*mockedSignalFactory, create(_)).Times(0);
 
         Phoneme p(*(UtauPhonemeConverter().convert(utau, dir, signalFactory)));
-        Phoneme expected(dir.filePath(utau.filename), utau.msLeftBlank, -utau.msRightBlank, utau.msFixedLength, utau.msPreutterance, utau.msOverlap);
+        Phoneme expected(QString("hoge/filename"), utau.msLeftBlank, -utau.msRightBlank, utau.msFixedLength, utau.msPreutterance, utau.msOverlap);
         QCOMPARE(p, expected);
     }
     void plus_right_blank_means_offset_from_the_end_of_waveform()

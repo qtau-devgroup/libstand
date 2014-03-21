@@ -30,7 +30,8 @@ public:
     WaveformCorpusBuilder(
             const CorpusMeta &meta,
             QSharedPointer<ResourceFactory<QString, Signal> > signalFactory = QSharedPointer<ResourceFactory<QString, Signal> >(new WaveFileSignalFactory),
-            QSharedPointer<UtauPhonemeConverter> converter = QSharedPointer<UtauPhonemeConverter>(new UtauPhonemeConverter)
+            QSharedPointer<UtauPhonemeConverter> converter = QSharedPointer<UtauPhonemeConverter>(new UtauPhonemeConverter),
+            QSharedPointer<NotePhonemeMapper> phonemeMapper = QSharedPointer<NotePhonemeMapper>(new NotePhonemeMapper)
             );
     virtual ~WaveformCorpusBuilder(){ }
 
@@ -84,9 +85,10 @@ public:
     virtual QSharedPointer<WaveformCorpus> build(const QSharedPointer<PhonemeSelector> selector);
 private:
     CorpusMeta meta;
+    QSharedPointer<NotePhonemeMapper> phonemeMapper;
     QSharedPointer<ResourceFactory<QString, Signal> > signalFactory;
     QSharedPointer<UtauPhonemeConverter> converter;
-    QSharedPointer<NotePhonemeMapper> phonemeMapper;
+
     QHash<QString, QSharedPointer<ResourceRepository<QString, Phoneme> > > phonemeRepositories;
 };
 

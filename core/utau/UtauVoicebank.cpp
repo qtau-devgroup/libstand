@@ -34,12 +34,12 @@ UtauVoicebank UtauVoicebank::apply(const QDir& root, QSharedPointer<UtauVoiceban
     return factory->create(root);
 }
 
-UtauVoicebankFactory::UtauVoicebankFactory(bool recursive, QSharedPointer<UtauOtoHashFactory> otoFactory,
+UtauVoicebankFactory::UtauVoicebankFactory(QSharedPointer<UtauOtoHashFactory> otoFactory,
     const QString &characterFileName,
     const QString &prefixMapFileName,
     const QString &otoIniFileName,
     QTextCodec *codec
-) : recursive(recursive), otoFactory(otoFactory), characterFileName(characterFileName), prefixMapFileName(prefixMapFileName), otoIniFileName(otoIniFileName), codec(codec)
+) : otoFactory(otoFactory), characterFileName(characterFileName), prefixMapFileName(prefixMapFileName), otoIniFileName(otoIniFileName), codec(codec)
 {
 }
 
@@ -52,10 +52,10 @@ UtauVoicebank UtauVoicebankFactory::create(const QDir &root) const
     return voicebank;
 }
 
-QList<UtauOtoHash> UtauVoicebankFactory::readOto(const QDir &dir, bool recursive) const
+QList<UtauOtoHash> UtauVoicebankFactory::readOto(const QDir &dir, bool subdirs) const
 {
     QList<UtauOtoHash> result;
-    if(recursive)
+    if(subdirs)
     {
         QFileInfoList files = dir.entryInfoList(QDir::Dirs);
         foreach(const QFileInfo &dir, files)

@@ -28,7 +28,6 @@ public:
      * @param otoFactory is a factory class of oto file.
      */
     explicit UtauVoicebankFactory(
-        bool recursive = true,
         QSharedPointer<UtauOtoHashFactory> otoFactory = QSharedPointer<UtauOtoHashFactory>(new UtauOtoHashFactory()),
         const QString &characterFileName = "character.txt",
         const QString &prefixMapFileName = "prefix.map",
@@ -44,11 +43,10 @@ public:
      */
     virtual UtauVoicebank create(const QDir &root) const;
 private:
-    QList<UtauOtoHash> readOto(const QDir &dir, bool recursive) const;
+    QList<UtauOtoHash> readOto(const QDir &dir, bool subdirs) const;
     UtauCharacterInfo readCharacter(const QFileInfo &filepath) const;
     UtauPrefixMap readPrefixMap(const QFileInfo &filepath) const;
 
-    bool recursive = true;
     QSharedPointer<UtauOtoHashFactory> otoFactory;
     const QString &characterFileName;
     const QString &prefixMapFileName;
