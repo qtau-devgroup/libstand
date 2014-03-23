@@ -1,8 +1,11 @@
+#-------------------------------------------------
+# http://github.com/qtau-devgroup/libstand
+#-------------------------------------------------
 QT -= gui
-QT += multimedia
 
 CONFIG += console
 CONFIG -= app_bundle
+TARGET = $$qtLibraryTarget(stand)
 
 TEMPLATE = lib
 
@@ -130,3 +133,18 @@ INCLUDEPATH += \
     core
 
 QMAKE_CXXFLAGS += -Wall -std=c++11
+
+#--------------------------------------------
+CONFIG(debug, debug|release) {
+    COMPILEDIR = $${OUT_PWD}/../../../debug
+} else {
+    COMPILEDIR = $${OUT_PWD}/../../../release
+}
+
+DESTDIR         = $${COMPILEDIR}/libstand/core/
+OBJECTS_DIR     = $${COMPILEDIR}/libstand/core/.obj
+MOC_DIR         = $${COMPILEDIR}/libstand/core/.moc
+RCC_DIR         = $${COMPILEDIR}/libstand/core/.rcc
+UI_DIR          = $${COMPILEDIR}/libstand/core/.ui
+#--------------------------------------------
+

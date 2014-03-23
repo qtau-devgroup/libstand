@@ -23,7 +23,7 @@ modules
 License
 ---
 
-modified BSD
+BSD
 
 Requirement
 ---
@@ -31,6 +31,7 @@ Requirement
 Qt 5.2.0
 MinGW 4.8+
 Google mock 1.7.0
+libsndfile 1.0.25
 
 Libraries
 ---

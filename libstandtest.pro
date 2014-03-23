@@ -1,4 +1,7 @@
-include(StandCore.pro)
+#-------------------------------------------------
+# http://github.com/qtau-devgroup/libstand
+#-------------------------------------------------
+include(libstandcore.pro)
 
 QT += testlib core
 QT -= gui
@@ -6,7 +9,9 @@ QT -= gui
 CONFIG += console
 CONFIG += test
 
-LIBS += -lgmock
+LIBS += \
+    -lgmock \
+    -lgtest
 
 TEMPLATE = app
 
@@ -69,3 +74,18 @@ INCLUDEPATH += \
     test
 
 QMAKE_CXXFLAGS += -Wall -std=c++11
+
+#--------------------------------------------
+CONFIG(debug, debug|release) {
+    COMPILEDIR = $${OUT_PWD}/../../../debug
+} else {
+    COMPILEDIR = $${OUT_PWD}/../../../release
+}
+
+DESTDIR         = $${COMPILEDIR}/libstand/test/.tests
+OBJECTS_DIR     = $${COMPILEDIR}/libstand/test/.obj
+MOC_DIR         = $${COMPILEDIR}/libstand/test/.moc
+RCC_DIR         = $${COMPILEDIR}/libstand/test/.rcc
+UI_DIR          = $${COMPILEDIR}/libstand/test/.ui
+#--------------------------------------------
+
