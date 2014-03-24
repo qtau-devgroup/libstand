@@ -141,10 +141,10 @@ CONFIG(debug, debug|release) {
     COMPILEDIR = $${OUT_PWD}/../../../release
 }
 
-DESTDIR         = $${COMPILEDIR}/libstand/core/
-OBJECTS_DIR     = $${COMPILEDIR}/libstand/core/.obj
-MOC_DIR         = $${COMPILEDIR}/libstand/core/.moc
-RCC_DIR         = $${COMPILEDIR}/libstand/core/.rcc
-UI_DIR          = $${COMPILEDIR}/libstand/core/.ui
+DESTDIR         = $${COMPILEDIR}/libstand/
+OBJECTS_DIR     = $${COMPILEDIR}/libstand/.obj
+MOC_DIR         = $${COMPILEDIR}/libstand/.moc
+RCC_DIR         = $${COMPILEDIR}/libstand/.rcc
+UI_DIR          = $${COMPILEDIR}/libstand/.ui
 #--------------------------------------------
 

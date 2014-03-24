@@ -13,6 +13,8 @@ LIBS += \
     -lgmock \
     -lgtest
 
+TARGET   = $$qtLibraryTarget(standtest)
+
 TEMPLATE = app
 
 HEADERS += \
@@ -82,10 +84,10 @@ CONFIG(debug, debug|release) {
     COMPILEDIR = $${OUT_PWD}/../../../release
 }
 
-DESTDIR         = $${COMPILEDIR}/libstand/test/.tests
-OBJECTS_DIR     = $${COMPILEDIR}/libstand/test/.obj
-MOC_DIR         = $${COMPILEDIR}/libstand/test/.moc
-RCC_DIR         = $${COMPILEDIR}/libstand/test/.rcc
-UI_DIR          = $${COMPILEDIR}/libstand/test/.ui
+DESTDIR         = $${COMPILEDIR}/libstand/.tests
+OBJECTS_DIR     = $${COMPILEDIR}/libstand/.obj
+MOC_DIR         = $${COMPILEDIR}/libstand/.moc
+RCC_DIR         = $${COMPILEDIR}/libstand/.rcc
+UI_DIR          = $${COMPILEDIR}/libstand/.ui
 #--------------------------------------------
 
